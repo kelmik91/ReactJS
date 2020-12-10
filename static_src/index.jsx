@@ -4,9 +4,7 @@ import MessageField from './components/MessageField.jsx'
 
 const App = () => {
    return (
-      <>
-         <MessageField />
-      </>
+      <MessageField />
    )
 };
 
