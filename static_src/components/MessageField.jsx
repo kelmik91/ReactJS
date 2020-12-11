@@ -1,5 +1,8 @@
 import React from "react";
 import Message from './Message.jsx';
+import { TextField, FloatingActionButton } from 'material-ui';
+import SendIcon from 'material-ui/svg-icons/content/send';
+
 
 export default class MessageField extends React.Component {
 
@@ -39,16 +42,29 @@ export default class MessageField extends React.Component {
         );
     }
 
+    handleKeyUp = () => {
+        if (event.keyCode === 13) { // Enter
+            this.send()
+        }
+    };
+ 
+
     render() {
         return (
             <>
                 <Message messages={this.state.messages} />
-                <form>
-                    <label>
-                        <input id='input' type="text" value={this.state.newMessage} onChange={this.handleChange} />
-                    </label>
-                    <button type="submit" onClick={this.send}>Add message</button>
-                </form>
+                <TextField
+                //    fullWidth={ true }
+                   hintText="Введите сообщение"
+                   style={ { fontSize: '22px', width: '90%' } }
+                   onChange={ this.handleChange }
+                   value={ this.state.newMessage }
+                   onKeyUp={ this.handleKeyUp }
+               />
+               <FloatingActionButton onClick={ this.send }>
+                   <SendIcon />
+               </FloatingActionButton>
+
             </>
         )
     }
