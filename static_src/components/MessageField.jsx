@@ -1,10 +1,22 @@
 import React from "react";
 import Message from './Message.jsx';
-import { TextField, FloatingActionButton } from 'material-ui';
-import SendIcon from 'material-ui/svg-icons/content/send';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 export default class MessageField extends React.Component {
+    classes = makeStyles((theme) => ({
+        root: {
+            '& > *': {
+                margin: theme.spacing(1),
+                width: '25ch',
+            },
+        },
+        button: {
+            margin: theme.spacing(1),
+          },
+    }));
 
     state = {
         messages: [
@@ -47,23 +59,36 @@ export default class MessageField extends React.Component {
             this.send()
         }
     };
- 
 
     render() {
         return (
             <>
-                <Message messages={this.state.messages} />
+                <p>Заглушка в MessageField</p>
+
                 <TextField
-                //    fullWidth={ true }
+                    // id="outlined-basic" 
+                    label="Message"
+                    variant="outlined"
+                    style={{ fontSize: '22px' }}
+                    fullWidth={true}
+                    onChange={this.handleChange}
+                    value={this.state.newMessage}
+                    onKeyUp={this.handleKeyUp} />
+
+                <Message messages={this.state.messages} />
+                {/* <TextField
+                className={this.root}
+                //    
                    hintText="Введите сообщение"
-                   style={ { fontSize: '22px', width: '90%' } }
-                   onChange={ this.handleChange }
-                   value={ this.state.newMessage }
-                   onKeyUp={ this.handleKeyUp }
-               />
-               <FloatingActionButton onClick={ this.send }>
-                   <SendIcon />
-               </FloatingActionButton>
+                   
+               /> */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={this.classes.button}
+                    onClick={this.send}>
+                    Send
+                </Button>
 
             </>
         )
