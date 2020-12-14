@@ -1,15 +1,11 @@
 import React from 'react';
 
 export default class Message extends React.Component {
-    componentDidMount() {
-        console.log("child did mount");
-    }
-
-    rendMessage = (message) => {
-        const name = message.message.name;
-        const text = message.message.text;
+    rendMessage = (msg) => {
+        const name = msg.name;
+        const text = msg.text;
         
-        if (message.message.name == 'Robot') {
+        if (name === 'Robot') {
             return (
                 <>
                     <span>{text} :</span>
@@ -27,9 +23,9 @@ export default class Message extends React.Component {
     }
 
     render() {
-        return this.props.messages.map(messages =>
-            <div key={messages.id} className={messages.name == 'Robot' ? 'divRobot' : ''}>
-                <this.rendMessage message={messages} />
+        return this.props.messages.map(msg =>
+            <div key={msg.id} className={msg.name === 'Robot' ? 'divRobot' : ''}>
+                {this.rendMessage(msg)}
             </div>
         )
             ;

@@ -1,23 +1,10 @@
 import React from "react";
 import Message from './Message.jsx';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import Grid from '@material-ui/core/Grid';
 
 export default class MessageField extends React.Component {
-    classes = makeStyles((theme) => ({
-        root: {
-            '& > *': {
-                margin: theme.spacing(1),
-                width: '25ch',
-            },
-        },
-        button: {
-            margin: theme.spacing(1),
-          },
-    }));
-
     state = {
         messages: [
             { id: 0, name: 'User', text: 'message0' },
@@ -43,14 +30,14 @@ export default class MessageField extends React.Component {
     send = () => {
         event.preventDefault();
         this.setState(
-            { messages: [...this.state.messages, { id: this.state.messages.length + 1, name: 'User', text: this.state.newMessage }] },
+            {
+                messages: [...this.state.messages, { id: this.state.messages.length + 1, name: 'User', text: this.state.newMessage }],
+                newMessage: ''
+            },
             () => {
                 this.sendRobot(this.state.messages[this.state.messages.length - 1].text);
                 console.log("state updated! User response");
             }
-        );
-        this.setState(
-            { newMessage: '' }
         );
     }
 
@@ -63,33 +50,39 @@ export default class MessageField extends React.Component {
     render() {
         return (
             <>
-                <p>Заглушка в MessageField</p>
-
-                <TextField
-                    // id="outlined-basic" 
-                    label="Message"
-                    variant="outlined"
-                    style={{ fontSize: '22px' }}
-                    fullWidth={true}
-                    onChange={this.handleChange}
-                    value={this.state.newMessage}
-                    onKeyUp={this.handleKeyUp} />
-
+                <h2>Chat 0</h2>
                 <Message messages={this.state.messages} />
-                {/* <TextField
-                className={this.root}
-                //    
-                   hintText="Введите сообщение"
-                   
-               /> */}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={this.classes.button}
-                    onClick={this.send}>
-                    Send
-                </Button>
-
+                <hr />
+                <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-end"
+                >
+                    <Grid item xs={10}>
+                        <TextField
+                            label="Message"
+                            variant="outlined"
+                            style={{ fontSize: '22px' }}
+                            fullWidth={true}
+                            onChange={this.handleChange}
+                            value={this.state.newMessage}
+                            onKeyUp={this.handleKeyUp} />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Button
+                            style={{
+                                fontSize: '24px'
+                            }}
+                            variant="contained"
+                            color="primary"
+                            onClick={this.send}
+                        >
+                            Send
+                        </Button>
+                    </Grid>
+                </Grid>
             </>
         )
     }
