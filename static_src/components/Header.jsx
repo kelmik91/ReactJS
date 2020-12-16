@@ -1,12 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid'
 
 export default class Header extends React.Component {
     render() {
-        return <h1>
+        return <Grid
+                    container
+                    spacing={4}
+                    direction="row"
+                    justify="space-evenly"
+                    alignItems="center" 
+                >
+            <Grid item>
             <Link to='/'>
-                Курс по ReactJS
+                <h3>Курс по ReactJS</h3>
             </Link>
-        </h1>
+            </Grid>
+            <Grid item>
+            <Link to='/profile/'>
+                <h4>Profile</h4>
+            </Link>
+            </Grid>
+        </Grid>
     }
 }
