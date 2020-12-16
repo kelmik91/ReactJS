@@ -79,9 +79,19 @@ export default class MessageField extends React.Component {
 
     render() {
         return (
-            <>
+            <Grid container
+            direction="column"
+            justify="space-between"
+            alignItems="stretch"
+            style= {{height:'40vw'}}
+            >
+            {/* <div > */}
+                <Grid item>
                 <h2>Chat {this.props.chatId}</h2>
                 <Message messages={this.state.chats[this.props.chatId].messages} />
+                
+                </Grid>
+                <Grid item>
                 <hr />
                 <Grid
                     container
@@ -112,8 +122,11 @@ export default class MessageField extends React.Component {
                             Send
                         </Button>
                     </Grid>
+                    </Grid>
                 </Grid>
-            </>
+                {/* </div> */}
+                </Grid>
+            
         )
     }
 }
