@@ -33,8 +33,17 @@ export default class MessageField extends React.Component {
 
     sendRobot = (message) => {
         const response = 'Я повторяю за тобой: ' + message;
+        const {chatId} = this.props;
         this.setState(
-            { chats: [...this.state.chats, { id: this.state.chats[this.props.chatId].messages.length + 1, name: 'Robot', text: response }] },
+            {chats: {...this.state.chats, 
+                [chatId]: {...this.state.chats[chatId], 
+                    messages:  [...this.state.chats[chatId].messages, { 
+                        id: this.state.chats[this.props.chatId].messages.length + 1, 
+                        name: 'Robot', 
+                        text: response 
+                    }] } },
+            newMessage: ''
+            },
             () => {
                 console.log("state updated. robot response!");
             }
@@ -43,13 +52,20 @@ export default class MessageField extends React.Component {
 
     send = () => {
         event.preventDefault();
+        const {messages} = this.state;
+        const {chatId} = this.props;
         this.setState(
-            {
-                [this.props.chatId]: [...this.state.chats, { id: this.state.chats[this.props.chatId].messages.length + 1, name: 'User', text: this.state.newMessage }],
-                newMessage: ''
+            {chats: {...this.state.chats, 
+                [chatId]: {...this.state.chats[chatId], 
+                    messages:  [...this.state.chats[chatId].messages, { 
+                        id: this.state.chats[this.props.chatId].messages.length + 1, 
+                        name: 'User', 
+                        text: this.state.newMessage 
+                    }] } },
+            newMessage: ''
             },
             () => {
-                // this.sendRobot(this.state.chats[this.props.chatId].messages[this.state.messages.length - 1].text);
+                this.sendRobot(this.state.chats[this.props.chatId].messages[this.state.chats[this.props.chatId].messages.length - 1].text);
                 console.log("state updated! User response");
             }
         );
