@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 export default class MessageField extends React.Component {
     state = {
-        chats:[{
+        chats:{
             1: {messages: [
                 { id: 0, name: 'User', text: 'message1 0' },
                 { id: 1, name: 'User', text: 'message1 1' },
@@ -25,7 +25,7 @@ export default class MessageField extends React.Component {
                 { id: 2, name: 'User', text: 'message3 2' },
                 { id: 3, name: 'User', text: 'message3 3' }]
             },
-        }],
+        },
         newMessage: ''
     };
 
