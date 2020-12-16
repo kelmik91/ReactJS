@@ -6,12 +6,26 @@ import Grid from '@material-ui/core/Grid';
 
 export default class MessageField extends React.Component {
     state = {
-        messages: [
-            { id: 0, name: 'User', text: 'message0' },
-            { id: 1, name: 'User', text: 'message1' },
-            { id: 2, name: 'User', text: 'message2' },
-            { id: 3, name: 'User', text: 'message3' }]
-        ,
+        chats:[{
+            1: {messages: [
+                { id: 0, name: 'User', text: 'message1 0' },
+                { id: 1, name: 'User', text: 'message1 1' },
+                { id: 2, name: 'User', text: 'message1 2' },
+                { id: 3, name: 'User', text: 'message1 3' }]
+            },
+            2: {messages: [
+                { id: 0, name: 'User', text: 'message2 0' },
+                { id: 1, name: 'User', text: 'message2 1' },
+                { id: 2, name: 'User', text: 'message2 2' },
+                { id: 3, name: 'User', text: 'message2 3' }]
+            },
+            3: {messages: [
+                { id: 0, name: 'User', text: 'message3 0' },
+                { id: 1, name: 'User', text: 'message3 1' },
+                { id: 2, name: 'User', text: 'message3 2' },
+                { id: 3, name: 'User', text: 'message3 3' }]
+            },
+        }],
         newMessage: ''
     };
 
@@ -20,7 +34,7 @@ export default class MessageField extends React.Component {
     sendRobot = (message) => {
         const response = 'Я повторяю за тобой: ' + message;
         this.setState(
-            { messages: [...this.state.messages, { id: this.state.messages.length + 1, name: 'Robot', text: response }] },
+            { chats: [...this.state.chats, { id: this.state.chats[this.props.chatId].messages.length + 1, name: 'Robot', text: response }] },
             () => {
                 console.log("state updated. robot response!");
             }
@@ -31,11 +45,11 @@ export default class MessageField extends React.Component {
         event.preventDefault();
         this.setState(
             {
-                messages: [...this.state.messages, { id: this.state.messages.length + 1, name: 'User', text: this.state.newMessage }],
+                [this.props.chatId]: [...this.state.chats, { id: this.state.chats[this.props.chatId].messages.length + 1, name: 'User', text: this.state.newMessage }],
                 newMessage: ''
             },
             () => {
-                this.sendRobot(this.state.messages[this.state.messages.length - 1].text);
+                // this.sendRobot(this.state.chats[this.props.chatId].messages[this.state.messages.length - 1].text);
                 console.log("state updated! User response");
             }
         );
@@ -50,8 +64,8 @@ export default class MessageField extends React.Component {
     render() {
         return (
             <>
-                <h2>Chat 0</h2>
-                <Message messages={this.state.messages} />
+                <h2>Chat {this.props.chatId}</h2>
+                <Message messages={this.state.chats[this.props.chatId].messages} />
                 <hr />
                 <Grid
                     container
