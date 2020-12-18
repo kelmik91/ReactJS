@@ -27,7 +27,6 @@ export default class Message extends React.Component {
             <div key={msg.id} className={msg.name === 'Robot' ? 'divRobot' : ''}>
                 {this.rendMessage(msg)}
             </div>
-        )
-            ;
+        );
     }
 }
