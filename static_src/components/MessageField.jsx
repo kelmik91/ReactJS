@@ -3,29 +3,13 @@ import Message from './Message.jsx';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { bindActionCreators } from "redux";
+import connect from "react-redux/es/connect/connect";
+import { sendMessage } from './../actions/messageActions.js'
 
-export default class MessageField extends React.Component {
+
+class MessageField extends React.Component {
     state = {
-        chats:{
-            1: {messages: [
-                { id: 0, name: 'User', text: 'message1 0' },
-                { id: 1, name: 'User', text: 'message1 1' },
-                { id: 2, name: 'User', text: 'message1 2' },
-                { id: 3, name: 'User', text: 'message1 3' }]
-            },
-            2: {messages: [
-                { id: 0, name: 'User', text: 'message2 0' },
-                { id: 1, name: 'User', text: 'message2 1' },
-                { id: 2, name: 'User', text: 'message2 2' },
-                { id: 3, name: 'User', text: 'message2 3' }]
-            },
-            3: {messages: [
-                { id: 0, name: 'User', text: 'message3 0' },
-                { id: 1, name: 'User', text: 'message3 1' },
-                { id: 2, name: 'User', text: 'message3 2' },
-                { id: 3, name: 'User', text: 'message3 3' }]
-            },
-        },
         newMessage: ''
     };
 
@@ -34,11 +18,12 @@ export default class MessageField extends React.Component {
     sendRobot = (message) => {
         const response = 'Я повторяю за тобой: ' + message;
         const {chatId} = this.props;
+        this.props.sendMessage((chatId), 'Robot', response);
         this.setState(
-            {chats: {...this.state.chats, 
-                [chatId]: {...this.state.chats[chatId], 
-                    messages:  [...this.state.chats[chatId].messages, { 
-                        id: this.state.chats[this.props.chatId].messages.length + 1, 
+            {chats: {...this.props.chats, 
+                [chatId]: {...this.props.chats[chatId], 
+                    messages:  [...this.props.chats[chatId].messages, { 
+                        id: this.props.chats[this.props.chatId].messages.length + 1, 
                         name: 'Robot', 
                         text: response 
                     }] } },
@@ -47,25 +32,26 @@ export default class MessageField extends React.Component {
             () => {
                 console.log("state updated. robot response!");
             }
-        )
+        );
     }
 
     send = () => {
         event.preventDefault();
         const {messages} = this.state;
         const {chatId} = this.props;
+        this.props.sendMessage((chatId), 'User', this.state.newMessage);
         this.setState(
-            {chats: {...this.state.chats, 
-                [chatId]: {...this.state.chats[chatId], 
-                    messages:  [...this.state.chats[chatId].messages, { 
-                        id: this.state.chats[this.props.chatId].messages.length + 1, 
+            {chats: {...this.props.chats, 
+                [chatId]: {...this.props.chats[chatId], 
+                    messages:  [...this.props.chats[chatId].messages, { 
+                        id: this.props.chats[this.props.chatId].messages.length + 1, 
                         name: 'User', 
                         text: this.state.newMessage 
                     }] } },
             newMessage: ''
             },
             () => {
-                this.sendRobot(this.state.chats[this.props.chatId].messages[this.state.chats[this.props.chatId].messages.length - 1].text);
+                this.sendRobot(this.props.chats[this.props.chatId].messages[this.props.chats[this.props.chatId].messages.length - 1].text);
                 console.log("state updated! User response");
             }
         );
@@ -78,17 +64,17 @@ export default class MessageField extends React.Component {
     };
 
     render() {
-        return (
+        return ( 
             <Grid container
             direction="column"
             justify="space-between"
             alignItems="stretch"
             style= {{height:'40vw'}}
             >
-            {/* <div > */}
                 <Grid item>
+                    {console.log(this.props)}
                 <h2>Chat {this.props.chatId}</h2>
-                <Message messages={this.state.chats[this.props.chatId].messages} />
+                <Message messages={this.props.chats[this.props.chatId].messages} />
                 
                 </Grid>
                 <Grid item>
@@ -124,9 +110,16 @@ export default class MessageField extends React.Component {
                     </Grid>
                     </Grid>
                 </Grid>
-                {/* </div> */}
                 </Grid>
             
         )
     }
 }
+
+const mapStateToProps = ({ chatReducer }) => ({
+    chats: chatReducer.chats,
+ });
+ 
+ const mapDispatchToProps = dispatch => bindActionCreators({sendMessage}, dispatch);
+ 
+ export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
