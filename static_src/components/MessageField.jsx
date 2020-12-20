@@ -17,42 +17,20 @@ class MessageField extends React.Component {
 
     sendRobot = (message) => {
         const response = 'Я повторяю за тобой: ' + message;
-        const {chatId} = this.props;
+        const { chatId } = this.props;
         this.props.sendMessage((chatId), 'Robot', response);
-        this.setState(
-            {chats: {...this.props.chats, 
-                [chatId]: {...this.props.chats[chatId], 
-                    messages:  [...this.props.chats[chatId].messages, { 
-                        id: this.props.chats[this.props.chatId].messages.length + 1, 
-                        name: 'Robot', 
-                        text: response 
-                    }] } },
-            newMessage: ''
-            },
-            () => {
-                console.log("state updated. robot response!");
-            }
-        );
     }
 
     send = () => {
         event.preventDefault();
-        const {messages} = this.state;
-        const {chatId} = this.props;
+        const { chatId } = this.props;
         this.props.sendMessage((chatId), 'User', this.state.newMessage);
         this.setState(
-            {chats: {...this.props.chats, 
-                [chatId]: {...this.props.chats[chatId], 
-                    messages:  [...this.props.chats[chatId].messages, { 
-                        id: this.props.chats[this.props.chatId].messages.length + 1, 
-                        name: 'User', 
-                        text: this.state.newMessage 
-                    }] } },
-            newMessage: ''
+            {
+                newMessage: ''
             },
             () => {
                 this.sendRobot(this.props.chats[this.props.chatId].messages[this.props.chats[this.props.chatId].messages.length - 1].text);
-                console.log("state updated! User response");
             }
         );
     }
@@ -64,61 +42,61 @@ class MessageField extends React.Component {
     };
 
     render() {
-        return ( 
+        return (
             <Grid container
-            direction="column"
-            justify="space-between"
-            alignItems="stretch"
-            style= {{height:'40vw'}}
+                direction="column"
+                justify="space-between"
+                alignItems="stretch"
+                style={{ height: '40vw' }}
             >
                 <Grid item>
-                <h2>Chat {this.props.chatId}</h2>
-                <Message messages={this.props.chats[this.props.chatId].messages} />
-                
+                    <h2>Chat {this.props.chatId}</h2>
+                    <Message messages={this.props.chats[this.props.chatId].messages} />
+
                 </Grid>
                 <Grid item>
-                <hr />
-                <Grid
-                    container
-                    spacing={2}
-                    direction="row"
-                    justify="space-between"
-                    alignItems="flex-end"
-                >
-                    <Grid item xs={10}>
-                        <TextField
-                            label="Message"
-                            variant="outlined"
-                            style={{ fontSize: '22px' }}
-                            fullWidth={true}
-                            onChange={this.handleChange}
-                            value={this.state.newMessage}
-                            onKeyUp={this.handleKeyUp} />
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button
-                            style={{
-                                fontSize: '24px'
-                            }}
-                            variant="contained"
-                            color="primary"
-                            onClick={this.send}
-                        >
-                            Send
+                    <hr />
+                    <Grid
+                        container
+                        spacing={2}
+                        direction="row"
+                        justify="space-between"
+                        alignItems="flex-end"
+                    >
+                        <Grid item xs={10}>
+                            <TextField
+                                label="Message"
+                                variant="outlined"
+                                style={{ fontSize: '22px' }}
+                                fullWidth={true}
+                                onChange={this.handleChange}
+                                value={this.state.newMessage}
+                                onKeyUp={this.handleKeyUp} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button
+                                style={{
+                                    fontSize: '24px'
+                                }}
+                                variant="contained"
+                                color="primary"
+                                onClick={this.send}
+                            >
+                                Send
                         </Button>
-                    </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
-                </Grid>
-            
+            </Grid>
+
         )
     }
 }
 
 const mapStateToProps = ({ chatReducer }) => ({
     chats: chatReducer.chats,
- });
- 
- const mapDispatchToProps = dispatch => bindActionCreators({sendMessage}, dispatch);
- 
- export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageField);

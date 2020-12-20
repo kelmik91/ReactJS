@@ -5,6 +5,7 @@ import Profile from './Profile.jsx';
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
 import { sendMessage } from "../actions/messageActions";
+import { profile } from '../actions/profileActions'
 
 class Router extends React.Component {
 
@@ -25,7 +26,11 @@ class Router extends React.Component {
                         chatId={Number(obj.match.params.chatId)}
                         sendMessage={sendMessage}
                     />} />
-                <Route exact path='/profile/' component={Profile} />
+                <Route exact path='/profile/'
+                    render={() => <Profile
+                        profile={this.props.profile}
+                        
+                    />} />
             </Switch>
         )
     }
@@ -33,6 +38,6 @@ class Router extends React.Component {
 
 const mapStateToProps = ({ }) => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, profile }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Router);

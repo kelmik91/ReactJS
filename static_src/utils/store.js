@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import initReducers from './../reducers';
+import initReducers from './../Reducers';
 
 
 function initStore() {
