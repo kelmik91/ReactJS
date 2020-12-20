@@ -35,11 +35,11 @@ export default function chatReducer(store = initialStore, action) {
                 chats: {
                     $merge: {
                         [action.id]: {
-                            messages: {
-                                id: store.chats[action.id].messages.id + 1,
-                                name: store.chats[action.id].messages.name,
-                                text: store.chats[action.id].messages.text
-                            }
+                            messages:  [...store.chats[action.id].messages, {
+                                id: store.chats[action.id].messages.length + 1,
+                                name: action.name,
+                                text: action.text
+                            }]
                         }
                     }
                 },

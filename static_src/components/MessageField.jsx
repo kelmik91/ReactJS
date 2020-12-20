@@ -72,7 +72,6 @@ class MessageField extends React.Component {
             style= {{height:'40vw'}}
             >
                 <Grid item>
-                    {console.log(this.props)}
                 <h2>Chat {this.props.chatId}</h2>
                 <Message messages={this.props.chats[this.props.chatId].messages} />
                 
