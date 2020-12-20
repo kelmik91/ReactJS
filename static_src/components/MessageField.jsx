@@ -24,7 +24,7 @@ class MessageField extends React.Component {
     send = () => {
         event.preventDefault();
         const { chatId } = this.props;
-        this.props.sendMessage((chatId), 'User', this.state.newMessage);
+        this.props.sendMessage((chatId), this.props.profile.name, this.state.newMessage);
         this.setState(
             {
                 newMessage: ''
@@ -93,8 +93,9 @@ class MessageField extends React.Component {
     }
 }
 
-const mapStateToProps = ({ chatReducer }) => ({
+const mapStateToProps = ({ chatReducer, profileReducer }) => ({
     chats: chatReducer.chats,
+    profile: profileReducer.profile,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch);

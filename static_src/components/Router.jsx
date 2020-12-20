@@ -27,10 +27,7 @@ class Router extends React.Component {
                         sendMessage={sendMessage}
                     />} />
                 <Route exact path='/profile/'
-                    render={() => <Profile
-                        profile={this.props.profile}
-                        
-                    />} />
+                    render={() => <Profile />} />
             </Switch>
         )
     }
