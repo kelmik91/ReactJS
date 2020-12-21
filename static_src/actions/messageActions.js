@@ -1,8 +1,8 @@
 export const SEND_MESSAGE = '@@message/SEND_MESSAGE';
 
-export const sendMessage = (id, name, text) => ({
+export const sendMessage = (chatId, name, text) => ({
    type: SEND_MESSAGE,
-   id,
+   chatId,
    name,
    text,
 });

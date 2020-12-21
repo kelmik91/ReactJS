@@ -30,7 +30,7 @@ class MessageField extends React.Component {
                 newMessage: ''
             },
             () => {
-                this.sendRobot(this.props.chats[this.props.chatId].messages[this.props.chats[this.props.chatId].messages.length - 1].text);
+                // this.sendRobot(this.props.chats[this.props.chatId].messages[this.props.chats[this.props.chatId].messages.length - 1].text);
             }
         );
     }
