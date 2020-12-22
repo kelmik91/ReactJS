@@ -7,7 +7,7 @@ class Profile extends React.Component {
     render() {
         return <>
             <h1>Profile</h1>
-            <div>You name: <b>{this.props.profile.name}</b></div>
+            <div>Hello: <b>{this.props.profile.name}</b></div>
             <div>
                 {this.props.profile.desc}
             </div>

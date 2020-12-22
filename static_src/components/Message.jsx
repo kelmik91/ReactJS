@@ -23,7 +23,6 @@ export default class Message extends React.Component {
     }
 
     render() {
-        console.log(this.props.messages);
         return this.props.messages.map(msg =>
             <div key={msg.messageId} className={msg.name === 'Robot' ? 'divRobot' : ''}>
                 {this.rendMessage(msg)}

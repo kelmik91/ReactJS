@@ -8,22 +8,25 @@ import { BrowserRouter } from 'react-router-dom';
 import Router from './components/Router.jsx';
 import { Provider } from 'react-redux';
 import initStore from './utils/store';
+import { ConnectedRouter } from 'connected-react-router';
 
 
 const App = () => {
    return (
       <Provider store={initStore()}>
-         <BrowserRouter>
-            <Header />
-            <Grid container>
-               <Grid item xs={4}>
-                  <ChatList />
+         {/* <ConnectedRouter history={history}> */}
+            <BrowserRouter>
+               <Header />
+               <Grid container>
+                  <Grid item xs={4}>
+                     <ChatList />
+                  </Grid>
+                  <Grid item xs={8}>
+                     <Router />
+                  </Grid>
                </Grid>
-               <Grid item xs={8}>
-                  <Router />
-               </Grid>
-            </Grid>
-         </BrowserRouter>
+            </BrowserRouter>
+         {/* </ConnectedRouter> */}
       </Provider>
    )
 };
