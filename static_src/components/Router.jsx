@@ -29,7 +29,7 @@ class Router extends React.Component {
                     />} />
                 <Route exact path='/profile/'
                     render={() => <Profile />} />
-                <Route path='/' component={ErrorPage} />
+                <Route component={ErrorPage} />
             </Switch>
         )
     }

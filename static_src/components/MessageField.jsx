@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
-import { sendMessage } from './../actions/messageActions.js'
+import { sendMessage } from './../actions/messageActions.js';
 
 
 class MessageField extends React.Component {
@@ -52,7 +52,6 @@ class MessageField extends React.Component {
                 <Grid item>
                     <h2>Chat {this.props.chatId}</h2>
                     <Message messages={this.props.chats[this.props.chatId].messages} />
-
                 </Grid>
                 <Grid item>
                     <hr />

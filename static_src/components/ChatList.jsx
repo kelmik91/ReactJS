@@ -23,15 +23,14 @@ export default class ChatList extends React.Component {
 
     rendChats = (chat) => {
         const path = '/chat/' + (chat.id + 1);
-        console.log(chat);
 
         return <Link to={path}>
-        <ListItem
-            button
-            key={chat.id+1}
-            onClick={() => push(path)}>
-            <ListItemText style={this.classes.links} primary={chat.title} />
-        </ListItem>
+            <ListItem
+                button
+                key={chat.id + 1}
+                onClick={() => push(path)}>
+                <ListItemText style={this.classes.links} primary={chat.title} />
+            </ListItem>
         </Link>
     }
 
