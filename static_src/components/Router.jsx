@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import MessageField from './MessageField.jsx'
 import Profile from './Profile.jsx';
+import ErrorPage from './ErrorPage.jsx';
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
 import { sendMessage } from "../actions/messageActions";
@@ -28,6 +29,7 @@ class Router extends React.Component {
                     />} />
                 <Route exact path='/profile/'
                     render={() => <Profile />} />
+                <Route path='/' component={ErrorPage} />
             </Switch>
         )
     }

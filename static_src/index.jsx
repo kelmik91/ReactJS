@@ -7,15 +7,15 @@ import Grid from '@material-ui/core/Grid';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './components/Router.jsx';
 import { Provider } from 'react-redux';
-import initStore from './utils/store';
+import initStore, {history} from './utils/store';
 import { ConnectedRouter } from 'connected-react-router';
 
 
 const App = () => {
    return (
       <Provider store={initStore()}>
-         {/* <ConnectedRouter history={history}> */}
-            <BrowserRouter>
+         <ConnectedRouter history={history}>
+            {/* <BrowserRouter> */}
                <Header />
                <Grid container>
                   <Grid item xs={4}>
@@ -25,8 +25,8 @@ const App = () => {
                      <Router />
                   </Grid>
                </Grid>
-            </BrowserRouter>
-         {/* </ConnectedRouter> */}
+            {/* </BrowserRouter> */}
+         </ConnectedRouter>
       </Provider>
    )
 };
