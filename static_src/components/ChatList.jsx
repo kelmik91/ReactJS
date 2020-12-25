@@ -2,7 +2,6 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
@@ -32,6 +31,7 @@ class ChatList extends React.Component {
         return <List component="nav" aria-label="contacts">
             {this.state.chats.map(chat =>
                 <ListItem
+                id={chat.id}
                     button
                     key={chat.id + 1}
                     onClick={() => this.handleNavigate(chat.id)}>
