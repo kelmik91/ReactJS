@@ -15,12 +15,6 @@ class MessageField extends React.Component {
 
     handleChange = e => this.setState({ newMessage: e.target.value });
 
-    sendRobot = (message) => {
-        const response = 'Я повторяю за тобой: ' + message;
-        const { chatId } = this.props;
-        this.props.sendMessage((chatId), 'Robot', response);
-    }
-
     send = () => {
         event.preventDefault();
         const { chatId } = this.props;
@@ -28,9 +22,6 @@ class MessageField extends React.Component {
         this.setState(
             {
                 newMessage: ''
-            },
-            () => {
-                // this.sendRobot(this.props.chats[this.props.chatId].messages[this.props.chats[this.props.chatId].messages.length - 1].text);
             }
         );
     }
