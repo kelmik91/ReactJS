@@ -16,14 +16,14 @@ export default class Header extends React.Component {
             <Grid item>
                 <Link to='/'>
                     <ListItem button>
-                        <ListItemText style={{ textAlign: 'center' }} primary='Курс по ReactJS' />
+                        <ListItemText primary='Курс по ReactJS' />
                     </ListItem>
                 </Link>
             </Grid>
             <Grid item>
                 <Link to='/profile/'>
                     <ListItem button>
-                        <ListItemText style={{ textAlign: 'center' }} primary='Profile' />
+                        <ListItemText primary='Profile' />
                     </ListItem>
                 </Link>
             </Grid>

@@ -5,7 +5,7 @@ export default class Message extends React.Component {
         const name = msg.name;
         const text = msg.text;
         
-        if (name === 'Robot') {
+        if (name === 'RobotMiddleware') {
             return (
                 <>
                     <span>{text} :</span>
@@ -24,7 +24,7 @@ export default class Message extends React.Component {
 
     render() {
         return this.props.messages.map(msg =>
-            <div key={msg.messageId} className={msg.name === 'Robot' ? 'divRobot' : ''}>
+            <div key={msg.messageId} className={msg.name === 'RobotMiddleware' ? 'divRobot' : ''}>
                 {this.rendMessage(msg)}
             </div>
         );

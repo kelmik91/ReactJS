@@ -1,7 +1,5 @@
-import React from 'react'
-import { bindActionCreators } from "redux";
+import React from 'react';
 import connect from "react-redux/es/connect/connect";
-import { profile } from './../actions/profileActions.js'
 
 class Profile extends React.Component {
     render() {
@@ -21,6 +19,4 @@ const mapStateToProps = ({ profileReducer }) => ({
     profile: profileReducer.profile,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);

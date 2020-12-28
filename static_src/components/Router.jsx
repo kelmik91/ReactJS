@@ -35,8 +35,6 @@ class Router extends React.Component {
     }
 }
 
-const mapStateToProps = ({ }) => ({});
-
 const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, profile }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Router);
+export default connect(null, mapDispatchToProps)(Router);

@@ -4,7 +4,6 @@ import '../styles/style.css'
 import Header from './components/Header.jsx';
 import ChatList from './components/ChatList.jsx';
 import Grid from '@material-ui/core/Grid';
-import { BrowserRouter } from 'react-router-dom';
 import Router from './components/Router.jsx';
 import { Provider } from 'react-redux';
 import initStore, { history } from './utils/store';
@@ -18,7 +17,6 @@ const App = () => {
       <Provider store={store}>
          <PersistGate loading={ null } persistor={ persistor }>
             <ConnectedRouter history={history}>
-               {/* <BrowserRouter> */}
                <Header />
                <Grid container>
                   <Grid item xs={4}>
@@ -28,7 +26,6 @@ const App = () => {
                      <Router />
                   </Grid>
                </Grid>
-               {/* </BrowserRouter> */}
             </ConnectedRouter>
          </PersistGate>
       </Provider>
