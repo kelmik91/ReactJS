@@ -32,6 +32,17 @@ class MessageField extends React.Component {
         }
     };
 
+    componentDidMount() {
+        fetch('/api/messages.json')
+        .then(body => body.json())
+        .then(json => {
+            json.chats[this.props.chatId].messages.forEach(msg => {
+                this.props.sendMessage(this.props.chatId, msg.name, msg.text);
+            })
+        })
+  
+    } 
+
     render() {
         return (
             <Grid container
