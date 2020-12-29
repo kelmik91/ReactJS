@@ -6,7 +6,7 @@ import ErrorPage from './ErrorPage.jsx';
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
 import { sendMessage } from "../actions/messageActions";
-import { profile } from '../actions/profileActions'
+import { change_profile } from '../actions/profileActions'
 
 class Router extends React.Component {
 
@@ -35,6 +35,6 @@ class Router extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, profile }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, change_profile }, dispatch);
 
 export default connect(null, mapDispatchToProps)(Router);

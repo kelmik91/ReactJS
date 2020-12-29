@@ -1,7 +1,7 @@
-export const PROFILE = '@@profile/PROFILE';
+export const CHANGE_PROFILE = '@@profile/PROFILE';
 
-export const profile = (name, desc) => ({
-   type: PROFILE,
+export const change_profile = (name, desc) => ({
+   type: change_profile,
    name,
    desc,
 });

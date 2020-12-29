@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import { PROFILE } from '../actions/profileActions';
+import { CHANGE_PROFILE } from '../actions/profileActions';
 
 const initialStore = {
     profile: {
@@ -11,7 +11,7 @@ const initialStore = {
 
 export default function profileReducer(store = initialStore, action) {
     switch (action.type) {
-        case PROFILE: {
+        case CHANGE_PROFILE: {
             return update(store, {
                 profile: {
                     $merge: {

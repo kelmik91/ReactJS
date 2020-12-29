@@ -8,10 +8,7 @@ import connect from "react-redux/es/connect/connect";
 
 class ChatList extends React.Component {
     state = {
-        chats: [
-            { id: 0, title: 'Chat 1' },
-            { id: 1, title: 'Chat 2' },
-            { id: 2, title: 'Chat 3' }]
+        "chats": []
     }
 
     classes = {
@@ -20,6 +17,12 @@ class ChatList extends React.Component {
             border: 'solid 1px black',
             textAlign: 'center'
         }
+    }
+
+    componentDidMount() {
+        fetch('/api/chats.json')
+            .then(body => body.json())
+            .then(json => this.setState({ chats: json }))
     }
 
     handleNavigate = (link) => {
@@ -42,7 +45,7 @@ class ChatList extends React.Component {
     }
 }
 
-const mapStateToProps = ({ }) => ({ });
+const mapStateToProps = ({ }) => ({});
 
 const mapDispatchToProps = dispatch => bindActionCreators({ push }, dispatch);
 
